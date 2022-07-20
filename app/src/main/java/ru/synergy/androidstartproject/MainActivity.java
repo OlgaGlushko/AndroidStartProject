@@ -1,8 +1,10 @@
 package ru.synergy.androidstartproject;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.os.Bundle;
+import android.widget.GridLayout;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -12,13 +14,28 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_main);
 
+
+        ConstraintLayout constraintLayout = new ConstraintLayout(this);
+
+
         TextView textView = new TextView(this);
+        textView.setText("Hello Android!");
+        textView.setTextSize(26);
 
-        textView.setText("Hello Android");
+        ConstraintLayout.LayoutParams layoutParams = new ConstraintLayout.LayoutParams(
+                ConstraintLayout.LayoutParams.WRAP_CONTENT,
+                ConstraintLayout.LayoutParams.WRAP_CONTENT);
 
-        textView.setTextSize(22);
+        layoutParams.leftToLeft = ConstraintLayout.LayoutParams.PARENT_ID;
+        layoutParams.topToTop = ConstraintLayout.LayoutParams.PARENT_ID;
+        layoutParams.rightToRight = ConstraintLayout.LayoutParams.PARENT_ID;
 
-        setContentView(textView);
+
+        textView.setLayoutParams(layoutParams);
+        constraintLayout.addView(textView);
+
+
+        setContentView(constraintLayout);
 
 
 
