@@ -1,16 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:id="@+id/ConstrtLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+  <TextView
+      android:id="@+id/view_1"
+      android:layout_width="wrap_content"
+      android:layout_height="89dp"
+      android:layout_marginStart="56dp"
+      android:layout_marginTop="384dp"
+      android:text="view_1"
+      android:textSize="24sp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
+
+  <TextView
+      android:id="@+id/view_2"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:layout_marginLeft="172dp"
+      android:text="view_2"
+      android:textSize="14sp"
+      app:layout_constraintBaseline_toBaselineOf="@id/view_1"
+      app:layout_constraintLeft_toRightOf="@id/view_1" />
+
+  <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/guideline2"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      app:layout_constraintGuide_begin="20dp" />
+
+  <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/guideline3"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      app:layout_constraintGuide_begin="20dp" />
 
 
+  <!-- app:layout_constraint{X}_to{Y}of="{Z}"
 
-</LinearLayout>
+   X- это какой-то constraint привязываемой view
+   Y- это сторона view   к которой мя привязались
+   Z-  id view k которому мы привязались
+   -->
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
