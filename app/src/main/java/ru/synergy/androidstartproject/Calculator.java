@@ -3,6 +3,7 @@ package ru.synergy.androidstartproject;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,9 +13,14 @@ import android.widget.Toast;
 
 public class Calculator extends AppCompatActivity {
 
+
+         private static final String LogcatTaq = "CALCULATOR_ACTIVITY";
+         private static final String LifecycleTaq = "LIFECYCLE";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(LifecycleTaq, "I'm onCreate(), and i'm started");
         setContentView(R.layout.activity_calculator);
 
         final Button calculate =(Button) findViewById(R.id.calc);
@@ -22,11 +28,44 @@ public class Calculator extends AppCompatActivity {
         calculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 calculateAnswe();
 
             }
         });
     }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(LifecycleTaq, "I'm onStart(), and i'm started");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(LifecycleTaq, "I'm onStop(), and i'm started");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(LifecycleTaq, "I'm onDestroy(), and i'm started");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(LifecycleTaq, "I'm onPause(), and i'm started");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(LifecycleTaq, "I'm onResume(), and i'm started");
+    }
+
     private void calculateAnswe(){
         EditText numOne =(EditText) findViewById(R.id.editTextNumberDecimal3);
         EditText numTwo =(EditText) findViewById(R.id.editTextNumberDecimal4);
