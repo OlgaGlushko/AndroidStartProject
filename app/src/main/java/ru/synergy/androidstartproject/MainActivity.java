@@ -1,9 +1,15 @@
 package ru.synergy.androidstartproject;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultCaller;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,13 +19,24 @@ import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.TextView;
 
-public class MainActivity extends Activity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
 
     private static final int REQ_C = 1;
-
     EditText et;
     private TextView tv;
+
+ActivityResultLauncher<Intent> mStartActivityForResult = registerForActivityResult(
+        new ActivityResultContract.StartActivityForResult(),
+        new ActivityResultCallback<ActivityResult>() {
+            @Override
+            public void  onActivityResult(ActivityResult result){
+                Intent intent = result.getData();
+                tv.setText(intent.getStringExtra("tv"));
+            }
+        }
+        );
+
 
 
     @Override
@@ -46,35 +63,33 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode,  Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode){
-            case RESULT_OK:
-                tv.setText(data.getStringExtra("et"));
+  //  @Override
+   // public void onActivityResult(int requestCode, int resultCode,  Intent data) {
+   //     super.onActivityResult(requestCode, resultCode, data);
+    //    switch (requestCode){
+   //         case RESULT_OK:
+     //           tv.setText(data.getStringExtra("et"));
 
-        }
-    }
+      //  }
+  //  }
 
     public void onClick(View v) {
-        Intent i ;
-        witch (v.getId()) ;
-            case R.id.button;
-                i= new Intent(this, MainActivity2.class);
+       Intent i ;
+       witch (v.getId()) ;
+       case R.id.button;
+               i= new Intent(this, MainActivity2.class);
+               startActivity(i);
+               break;
+        case R.id.button2;
+    i= new Intent(This, ToInfActivity.class);
+               String eText = et.getText().toString();
+               i.putExtra("et", eText);
                 startActivity(i);
-                break;
-            case R.id.button2;
-                i= new Intent(This, ToInfActivity.class);
-                String eText = et.getText().toString();
-                i.putExtra("et", eText);
-                startActivity(i);
-                break;
+               break;
 
             case R.id.button3:
-                i= new Intent(This, ComeBackActivity.class);
-                startActivityForResult(i, REQ_C);
-                break;
+               i= new Intent(this, ComeBackActivity.class);
+               mStartActivityForResult.launch(i);
 
         }
     }
-}
