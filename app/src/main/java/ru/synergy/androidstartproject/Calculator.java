@@ -1,13 +1,17 @@
 package ru.synergy.androidstartproject;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ListAdapter;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,12 +28,34 @@ public class Calculator extends AppCompatActivity {
         setContentView(R.layout.activity_calculator);
 
         final Button calculate =(Button) findViewById(R.id.calc);
+ // context training
+  //      TextView textView = new TextView(this);
+  //      ListAdapter adapter = new SimpleCursorAdapter(getApplicationContext());
+
+        // доступ из класса активити- наследник контекст
+    //    getSystemService(LAYOUT_INFLATER_SERVICE);
+
+        //Shared prefs доступ с использованием  контекста приложения
+      //  SharedPreferences prefs = getApplicationContext().getSharedPreferences("PREFS", MODE_PRIVATE);
+        ////
+
+
+
+
+
+
+
 
         calculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+              Log.d(LogcatTaq, "Button have been pushed");
+              calculateAnswe();
 
-                calculateAnswe();
+                Intent i = new Intent( Calculator.this, MainActivity.class); // написать письмо
+                startActivity(i);// отправить его
+
+
 
             }
         });
