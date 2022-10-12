@@ -93,33 +93,57 @@ public class Calculator extends AppCompatActivity {
         RadioButton add = (RadioButton) findViewById(R.id.add);
         RadioButton sub = (RadioButton) findViewById(R.id.subtrackt);
         RadioButton multiply = (RadioButton) findViewById(R.id.multiply);
-        RadioButton devide = (RadioButton) findViewById(R.id.devide);
+        RadioButton divide = (RadioButton) findViewById(R.id.devide);
 
         TextView answer = (TextView) findViewById(R.id.result);
 
-        float numone  = Integer.parseInt(numOne.getText().toString());
-        float numtwo  = Integer.parseInt(numTwo.getText().toString());
+        Log.d(LogcatTaq,msg: "All views have "been founded");
+
+     //           try {
+      //              int a= 25/0;
+
+      //          } catch (ArithmeticException e){
+     //               e.printStackTrace();
+     //           }
+        float numtwo = 0;
+        float numone = 0;
+        String num1  = numOne.getText().toString());
+        String num2 = numTwo.getText().toString());
+       if(!num1.equals("")&& num1 != null){
+            numone = Integer.parseInt(numOne.getText().toString());
+       }
+        if(!num2.equals("")&& num2 != null){
+            numtwo = Integer.parseInt(numTwo.getText().toString());
+
+        Log.d(LogcatTaq,msg:"Successfully grabbed data from input fields");
+        Log,d(LogcatTaq,msg: "numone is: " + numone  +";"+" numtwo is :" + numtwo);
 
         float solution = 0;
+
         if(add.isChecked()) {
+            Log.d(LogcatTaq.msg:"Operation is add");
             solution = numone + numtwo;
         }
 
         if(sub.isChecked()) {
-            solution = numone - numtwo;
+            Log.d(LogcatTaq.msg:"Operation is sub");
+             solution = numone - numtwo;
         }
 
         if(multiply.isChecked()) {
+            Log.d(LogcatTaq.msg:"Operation is multiply");
             solution = numone * numtwo;
         }
 
-        if(devide.isChecked()) {
+        if(divide.isChecked()) {
+            Log.d(LogcatTaq.msg:"Operation is divide");
             if(numtwo == 0){
                 Toast.makeText( this,"Number two Cannot be zero",Toast.LENGTH_SHORT).show();
                 return;
         }
        solution = numone / numtwo;
         }
+            Log.d(LogcatTaq.msg:"The result of operations is:"+ solution);
 
         answer.setText("The answer is" + solution);
 
