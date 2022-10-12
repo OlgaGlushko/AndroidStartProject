@@ -40,13 +40,7 @@ public class Calculator extends AppCompatActivity {
         ////
 
 
-
-
-
-
-
-
-        calculate.setOnClickListener(new View.OnClickListener() {
+       calculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
               Log.d(LogcatTaq, "Button have been pushed");
