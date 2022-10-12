@@ -184,7 +184,7 @@ private void dropFields(){
 
         answer.setText("The answer is" + solution);
 
-        switch ((int) Match.random() * 2) {
+        switch ((int) (Math.random() * 3)) {
             case 0:
                 throw new ArithmeticException("I am generated arithmetical exception");
             case 1:
