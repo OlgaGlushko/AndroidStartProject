@@ -68,20 +68,20 @@ ActivityResultLauncher<Intent> mStartActivityForResult = registerForActivityResu
     public void onClick(View v) {
        Intent i ;
        witch (v.getId()) ;
-       case R.id.button;
-               i= new Intent(this, MainActivity2.class);
+        case R.id.button:
+               i = new Intent(this, MainActivity2.class);
                startActivity(i);
                break;
-        case R.id.button2;
+        case R.id.button2:
     i= new Intent(This, ToInfActivity.class);
                String eText = et.getText().toString();
                i.putExtra("et", eText);
                 startActivity(i);
                break;
 
-           case R.id.button3:
-            i= new Intent(this, ComeBackActivity.class);
-            mStartActivityForResult.launch(i);
+        case R.id.button3:
+            i = new Intent(this, ComeBackActivity.class);
+            mStartActivityFotResult.launch(i);
 
         }
     }
