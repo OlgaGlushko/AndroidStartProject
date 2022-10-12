@@ -22,11 +22,11 @@
       android:id="@+id/view_2"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginStart="56dp"
+      android:layout_marginStart="88dp"
       android:text="view_2"
       android:textSize="14sp"
       app:layout_constraintStart_toStartOf="@+id/guideline3"
-      tools:layout_editor_absoluteY="216dp" />
+      tools:layout_editor_absoluteY="197dp" />
 
   <androidx.constraintlayout.widget.Guideline
       android:id="@+id/guideline2"
@@ -40,7 +40,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:orientation="horizontal"
-      app:layout_constraintGuide_begin="323dp" />
+      app:layout_constraintGuide_begin="264dp" />
 
 
   <TextView
@@ -86,24 +86,39 @@
       android:id="@+id/right_view"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginLeft="52dp"
+      android:layout_marginLeft="156dp"
       android:text="Right View"
       android:textSize="20sp"
       app:layout_constraintBaseline_toBaselineOf="@id/left_view"
-      app:layout_constraintLeft_toRightOf="@id/left_view" />
+      app:layout_constraintLeft_toRightOf="@id/left_view" /><![CDATA[
 
-  <Button
-      android:id="@+id/button"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginStart="56dp"
-      android:text="Button"
-      app:layout_constraintEnd_toStartOf="@id/button2"
-      app:layout_constraintHorizontal_chainStyle="packed"
-      app:layout_constraintStart_toStartOf="@+id/guideline2"
-      tools:layout_editor_absoluteY="216dp" /><![CDATA[
+
 
   -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -113,16 +128,27 @@
   ]]>
 
   <Button
+      android:id="@+id/button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="612dp"
+      android:text="Button"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toStartOf="@id/button2"
+      app:layout_constraintHorizontal_chainStyle="packed"
+      app:layout_constraintStart_toStartOf="@+id/guideline2" />
+
+  <Button2
       android:id="@+id/button2"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginStart="151dp"
       android:layout_marginEnd="16dp"
+      android:layout_marginBottom="628dp"
       android:text="Button2"
+      app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_chainStyle="packed"
-      app:layout_constraintStart_toEndOf="@+id/button"
-      tools:layout_editor_absoluteY="216dp" />
+      app:layout_constraintStart_toEndOf="@+id/button" />
 
   <TextView
       android:id="@+id/view_hide1"

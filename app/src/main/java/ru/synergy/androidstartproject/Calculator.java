@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.ListAdapter;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.service.autofill.FieldClassification;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -15,11 +16,13 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
+
 public class Calculator extends AppCompatActivity {
 
 
-         private static final String LogcatTaq = "CALCULATOR_ACTIVITY";
-         private static final String LifecycleTaq = "LIFECYCLE";
+    private static final String LogcatTaq = "CALCULATOR_ACTIVITY";
+    private static final String LifecycleTaq = "LIFECYCLE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,28 +30,40 @@ public class Calculator extends AppCompatActivity {
         Log.d(LifecycleTaq, "I'm onCreate(), and i'm started");
         setContentView(R.layout.activity_calculator);
 
-        final Button calculate =(Button) findViewById(R.id.calc);
- // context training
-  //      TextView textView = new TextView(this);
-  //      ListAdapter adapter = new SimpleCursorAdapter(getApplicationContext());
+        final Button calculate = (Button) findViewById(R.id.calc);
+        // context training
+        //      TextView textView = new TextView(this);
+        //      ListAdapter adapter = new SimpleCursorAdapter(getApplicationContext());
 
         // доступ из класса активити- наследник контекст
-    //    getSystemService(LAYOUT_INFLATER_SERVICE);
+        //    getSystemService(LAYOUT_INFLATER_SERVICE);
 
         //Shared prefs доступ с использованием  контекста приложения
-      //  SharedPreferences prefs = getApplicationContext().getSharedPreferences("PREFS", MODE_PRIVATE);
+        //  SharedPreferences prefs = getApplicationContext().getSharedPreferences("PREFS", MODE_PRIVATE);
         ////
 
 
-       calculate.setOnClickListener(new View.OnClickListener() {
+        calculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              Log.d(LogcatTaq, "Button have been pushed");
-              calculateAnswe();
+                Log.d(LogcatTaq, "Button have been pushed");
+                try {
+                    calculateAnswe();
+                } catch (Exception e) {
 
-                Intent i = new Intent( Calculator.this, MainActivity.class); // написать письмо
+                    //прерывание
+              // e.printStrackTrace();
+             //       Toast.makeText(Calculator.this, e.getMessage(), Toast.LENGTH_LONG).show();
+              //      finish();
+
+
+                //восстановление
+                e.printStackTrace();
+                Toast.makeText(Calculator.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                dropFields();
+            }
+                Intent i = new Intent(Calculator.this, MainActivity.class); // написать письмо
                 startActivity(i);// отправить его
-
 
 
             }
@@ -85,67 +100,96 @@ public class Calculator extends AppCompatActivity {
         super.onResume();
         Log.d(LifecycleTaq, "I'm onResume(), and i'm started");
     }
+private void dropFields(){
 
-    private void calculateAnswe(){
-        EditText numOne =(EditText) findViewById(R.id.editTextNumberDecimal3);
-        EditText numTwo =(EditText) findViewById(R.id.editTextNumberDecimal4);
+}
+
+
+    private void calculateAnswe() throws ArithmeticException, IOException {
+        EditText numOne = (EditText) findViewById(R.id.editTextNumberDecimal3);
+        EditText numTwo = (EditText) findViewById(R.id.editTextNumberDecimal4);
 
         RadioButton add = (RadioButton) findViewById(R.id.add);
         RadioButton sub = (RadioButton) findViewById(R.id.subtrackt);
         RadioButton multiply = (RadioButton) findViewById(R.id.multiply);
         RadioButton divide = (RadioButton) findViewById(R.id.devide);
 
+        numOne.setText("0");
+        numTwo.setText("0");
+        add.setChecked(true);
+
         TextView answer = (TextView) findViewById(R.id.result);
 
-        Log.d(LogcatTaq,msg: "All views have "been founded");
+        answer.setText("Now we have problems, try again later");
+    }
 
-     //           try {
-      //              int a= 25/0;
+        private void calculateAnswe() throws ArithmeticException, IOException {
+            EditText numOne = (EditText) findViewById(R.id.editTextNumberDecimal3);
+            EditText numTwo = (EditText) findViewById(R.id.editTextNumberDecimal4);
 
-      //          } catch (ArithmeticException e){
-     //               e.printStackTrace();
-     //           }
+            RadioButton add = (RadioButton) findViewById(R.id.add);
+            RadioButton sub = (RadioButton) findViewById(R.id.subtrackt);
+            RadioButton multiply = (RadioButton) findViewById(R.id.multiply);
+            RadioButton divide = (RadioButton) findViewById(R.id.devide);
+
+            numOne.setText("0");
+            numTwo.setText("0");
+            add.setChecked(true);
+
+            TextView answer = (TextView) findViewById(R.id.result);
+
+
+        Log.d(LogcatTaq, "All views have been founded");
+
+
         float numtwo = 0;
         float numone = 0;
-        String num1  = numOne.getText().toString());
-        String num2 = numTwo.getText().toString());
-       if(!num1.equals("")&& num1 != null){
+        String num1 = numOne.getText().toString();
+        String num2 = numTwo.getText().toString();
+        if (!num1.equals("") && num1 != null) {
             numone = Integer.parseInt(numOne.getText().toString());
-       }
-        if(!num2.equals("")&& num2 != null){
+        }
+        if (!num2.equals("") && num2 != null) {
             numtwo = Integer.parseInt(numTwo.getText().toString());
-
-        Log.d(LogcatTaq,msg:"Successfully grabbed data from input fields");
-        Log,d(LogcatTaq,msg: "numone is: " + numone  +";"+" numtwo is :" + numtwo);
+        }
+        Log.d(LogcatTaq, "Successfully grabbed data from input fields");
+        Log.d(LogcatTaq, "numone is: " + numone + " ; " + " numtwo is :" + numtwo);
 
         float solution = 0;
 
-        if(add.isChecked()) {
-            Log.d(LogcatTaq.msg:"Operation is add");
+        if (add.isChecked()) {
+            Log.d(LogcatTaq, "Operation is add");
             solution = numone + numtwo;
         }
 
-        if(sub.isChecked()) {
-            Log.d(LogcatTaq.msg:"Operation is sub");
-             solution = numone - numtwo;
+        if (sub.isChecked()) {
+            Log.d(LogcatTaq, "Operation is sub");
+            solution = numone - numtwo;
         }
 
-        if(multiply.isChecked()) {
-            Log.d(LogcatTaq.msg:"Operation is multiply");
+        if (multiply.isChecked()) {
+            Log.d(LogcatTaq, "Operation is multiply");
             solution = numone * numtwo;
         }
 
-        if(divide.isChecked()) {
-            Log.d(LogcatTaq.msg:"Operation is divide");
-            if(numtwo == 0){
-                Toast.makeText( this,"Number two Cannot be zero",Toast.LENGTH_SHORT).show();
+        if (divide.isChecked()) {
+            Log.d(LogcatTaq, "Operation is divide");
+            if (numtwo == 0) {
+                Toast.makeText(this, "Number two Cannot be zero", Toast.LENGTH_SHORT).show();
                 return;
+            }
+            solution = numone / numtwo;
         }
-       solution = numone / numtwo;
-        }
-            Log.d(LogcatTaq.msg:"The result of operations is:"+ solution);
+        Log.d(LogcatTaq, "The result of operations is:" + solution);
 
         answer.setText("The answer is" + solution);
 
+        switch ((int) Match.random() * 2) {
+            case 0:
+                throw new ArithmeticException("I am generated arithmetical exception");
+            case 1:
+                throw new IOException("i am generated ioexception exception");
+
+        }
     }
 }
